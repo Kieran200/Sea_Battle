@@ -1,0 +1,7 @@
+C:\Users\Владелец\source\repos\Sea_Battle\Sea_Battle\bin\Debug\Sea_Battle.exe.config
+C:\Users\Владелец\source\repos\Sea_Battle\Sea_Battle\bin\Debug\Sea_Battle.exe
+C:\Users\Владелец\source\repos\Sea_Battle\Sea_Battle\bin\Debug\Sea_Battle.pdb
+C:\Users\Владелец\source\repos\Sea_Battle\Sea_Battle\obj\Debug\Sea_Battle.csprojAssemblyReference.cache
+C:\Users\Владелец\source\repos\Sea_Battle\Sea_Battle\obj\Debug\Sea_Battle.csproj.CoreCompileInputs.cache
+C:\Users\Владелец\source\repos\Sea_Battle\Sea_Battle\obj\Debug\Sea_Battle.exe
+C:\Users\Владелец\source\repos\Sea_Battle\Sea_Battle\obj\Debug\Sea_Battle.pdb
