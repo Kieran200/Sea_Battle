@@ -10,8 +10,12 @@ namespace Sea_Battle
     {
         static void Main(string[] args)
         {
+            int randomfield;
+            int stop = 1;
+            int count = 1;
             string[,] field = new string[16, 16];
             string[,] invisiblefield = new string[16, 16];
+            string[,] userfield = new string[16, 16];
             User user = new User();
             Computer comp = new Computer();
 
@@ -21,24 +25,58 @@ namespace Sea_Battle
                 {
                     field[i, j] = ".";
                     invisiblefield[i, j] = ".";
+                    userfield[i, j] = ".";
                 }
             }
 
+            while (count <= 20)
+            {
+                Console.Clear();
+                for (int j = 3; j < userfield.GetLength(1) - 3; j++)
+                {
+                    for (int i = 3; i < userfield.GetLength(0) - 3; i++)
+                    {
+                        Console.Write(userfield[i, j]);
+                    }
+                    Console.WriteLine("");
+                }
+                user.GetUserField(userfield, out randomfield);
+                if (randomfield > 0)
+                {
+                    user.InsallShip(userfield, user);
+                    break;
+                }
+                count++;
+            }
+
+
             comp.InsallShip(invisiblefield, comp);
-            DrawField(field, invisiblefield);
+            DrawField(field, userfield);
 
             while (true)
             {
-                user.UserAttack(invisiblefield);
-                for (int j = 0; j < field.GetLength(1); j++)
+                int usercounthits = 0;
+                int compcounthits = 0;
+                while (usercounthits == 0)
                 {
-                    for (int i = 0; i < field.GetLength(0); i++)
+                    user.UserAttack(invisiblefield, out stop, out usercounthits);
+                    for (int j = 0; j < field.GetLength(1); j++)
                     {
-                        if (invisiblefield[i, j] != "1")
-                            field[i, j] = invisiblefield[i, j];
+                        for (int i = 0; i < field.GetLength(0); i++)
+                        {
+                            if (invisiblefield[i, j] != "1")
+                                field[i, j] = invisiblefield[i, j];
+                        }
                     }
+                    DrawField(field, userfield);
                 }
-                DrawField(field, invisiblefield);
+                Console.WriteLine("Нажмите Enter для атаки компьютера");
+                Console.ReadKey();             
+                while (compcounthits == 0)
+                {
+                    comp.ComputerAttack(userfield, out compcounthits);
+                    DrawField(field, userfield);
+                }
             }
 
             
@@ -66,12 +104,16 @@ namespace Sea_Battle
                     {
                         if (field2[i, j] == "х")
                             Console.ForegroundColor = ConsoleColor.Red;
-                        if (field[i, j] == "о")
+                        if (field2[i, j] == "о")
                             Console.ForegroundColor = ConsoleColor.DarkCyan;
                         Console.Write(field2[i, j]);
                         Console.ResetColor();
                     }
                     Console.WriteLine("");
+                }
+                if (stop == 0)
+                {
+                    Console.WriteLine("Корабль убит");
                 }
             }
         }
